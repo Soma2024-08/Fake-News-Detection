@@ -36,9 +36,10 @@ You can install all necessary libraries using the following command:
 
 ```bash
 pip install pandas numpy scikit-learn nltk seaborn nlp_utils matplotlib
+```
 
 ### Methodology
- -Data Preprocessing & Cleaning
+ ## 1. Data Preprocessing & Cleaning
 -Missing Values: All missing values in the title and text columns were filled with an empty string ("").
 
 -Text Cleaning: The raw text was converted to lowercase and punctuation/numbers were removed.
@@ -46,3 +47,46 @@ pip install pandas numpy scikit-learn nltk seaborn nlp_utils matplotlib
 -Tokenization & Stemming: Stop words (English) were removed, and the Porter Stemmer was applied to reduce words to their base form (e.g., 'running' to 'run').
 
 -Data Split: The dataset was split into 70% training and 30% testing sets (test_size=0.30, random_state=40).
+
+
+### 2. Feature Engineering
+The text data was transformed into numerical features using two primary vectorization methods:
+
+| Vectorizer | Description | Training Matrix Shape (Samples, Features) |
+| :--- | :--- | :--- |
+| **TF-IDF Vectorizer** | Calculates a weighted score (Term Frequency-Inverse Document Frequency) for each word, prioritizing rare but important words (`max_df=0.7` was used to ignore terms appearing in over 70% of documents). | (50493, 205963) |
+| **Count Vectorizer** | Creates a matrix where each entry represents the **frequency** (count) of a word in a given document (Bag-of-Words model). | (50493, 205963) |
+
+## 🤖 Machine Learning Models & Performance Results
+
+### Machine Learning Models Trained
+The following classifiers were trained on the processed and vectorized news text features and evaluated on the test set:
+
+* **Naive Bayes (MultinomialNB)**
+* **Random Forest Classifier**
+* **K-Nearest Neighbors (KNeighborsClassifier)**
+* **Logistic Regression**
+* **Linear Support Vector Machine (LinearSVC)**
+
+---
+
+### Performance Results
+
+| Model | Vectorizer | Test Accuracy |
+| :--- | :--- | :--- |
+| **Linear SVM** | TF-IDF | **0.9567 (95.67%)** |
+| **Logistic Regression** | Count | **0.9515 (95.15%)** |
+| **Random Forest** | Count | **0.9316 (93.16%)** |
+| **Naive Bayes** | Count | **0.890 (89.0%)** |
+| **K-Nearest Neighbors (KNN)** | Count | **0.7788 (77.88%)** |
+
+### Key Observations
+
+* **Highest Accuracy:** The **Linear SVM** model achieved the best overall performance, demonstrating excellent separation of the classes when using TF-IDF weighting.
+* **Vectorization Preference:** For the top models, simple linear classifiers (SVM, Logistic Regression) proved highly effective, indicating that the difference in word choice and weighting (as captured by TF-IDF/Count) is strongly predictive.
+* **KNN Limitation:** KNN delivered the lowest accuracy, which is a common issue in text classification when dealing with high-dimensional and sparse feature sets.
+
+### Feature Importance (Random Forest)
+The Random Forest model was used to calculate the importance of each word (feature) in the classification process.
+
+****
