@@ -90,3 +90,24 @@ The following classifiers were trained on the processed and vectorized news text
 The Random Forest model was used to calculate the importance of each word (feature) in the classification process.
 
 ****
+### 📊 Classification Model Analysis 
+## 1. ROC Curve (Receiver Operating Characteristic)
+-Purpose: Measures the trade-off between the True Positive Rate (TPR) and False Positive Rate (FPR) at various threshold settings to assess how well the model separates the classes.
+-Metric: The Area Under the Curve (AUC). A value of $1.0$ is perfect classification; $0.5$ is random.
+-Axes: Y-axis is TPR (Recall), and X-axis is FPR (1 - Specificity).
+-Project Context: The Random Forest model showed a high AUC (close to $1.0$), indicating excellent separability and robust performance in distinguishing between Real and Fake news.
+## 2. Precision-Recall CurvePurpose:
+Measures the trade-off between Precision and Recall for different classification thresholds. This curve is especially useful when the costs of different errors (False Positives vs. False Negatives) are unequal.
+-Precision (Exactness): Out of all predictions made for the positive class (Fake News), how many were correct?
+```bash
+Formula: $\frac{TP}{TP + FP}$
+```
+-Recall (Completeness): Out of all actual positive cases (Fake News), how many did the model correctly identify? 
+```bash
+Formula: $\frac{TP}{TP + FN}$
+```
+-Project Context: The curve confirmed the model is effective at retrieving most Fake News cases while maintaining high precision.
+## 3. Feature Importance Top Words (Random Forest)Concept: 
+In tree-based models like Random Forest, Feature Importance quantifies how much each input feature (a word in the vocabulary) contributed to the overall prediction accuracy across all trees.
+Value: This metric provides model interpretability, highlighting the key linguistic patterns that the model learned.
+Insight: Highly weighted words often represent unique vocabulary, partisan terms, or sensationalized language associated with the Fake News class.
