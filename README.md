@@ -99,6 +99,7 @@ The Random Forest model was used to calculate the importance of each word (featu
 <p align="center">
   <img src="output.png" width="500"/>
 </p>
+
 ## 2. Precision-Recall CurvePurpose:
 Measures the trade-off between Precision and Recall for different classification thresholds. This curve is especially useful when the costs of different errors (False Positives vs. False Negatives) are unequal.
 -Precision (Exactness): Out of all predictions made for the positive class (Fake News), how many were correct?
@@ -113,6 +114,7 @@ Formula: TP/(TP + FN)
 <p align="center">
   <img src="output1.png" width="500"/>
 </p>
+
 ## 3. Feature Importance Top Words (Random Forest)Concept: 
 In tree-based models like Random Forest, Feature Importance quantifies how much each input feature (a word in the vocabulary) contributed to the overall prediction accuracy across all trees.
 <p align="center">
